@@ -1,6 +1,6 @@
 // RECOVERY STUB (2026): original launcher class was not in surviving source.
 // This is a minimal replacement to make GameHolder.java compilable.
-// Original gameplay data and original art are NOT included.
+// Uses the recovered original title and kingdom artwork.
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -36,7 +36,29 @@ public class EmotionalCrusadeHolder {
             }
             JFrame frame = new JFrame("Emotional Crusade - Recovered Source Preview");
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.setContentPane(new GameHolder(new EmotionalCrusadeHolder()));
+            EmotionalCrusadeHolder holder = new EmotionalCrusadeHolder();
+            CardLayout screens = new CardLayout();
+            JPanel root = new JPanel(screens);
+            Image titleImage = holder.getImage("ech_start_panel.png");
+            JPanel menu = new JPanel(new BorderLayout()) {
+                @Override
+                protected void paintComponent(Graphics g) {
+                    super.paintComponent(g);
+                    g.drawImage(titleImage, 0, 0, getWidth(), getHeight(), this);
+                }
+            };
+            JButton play = new JButton("Play");
+            play.setFont(new Font("Serif", Font.BOLD, 28));
+            play.addActionListener(event -> {
+                root.add(new GameHolder(holder), "Game");
+                screens.show(root, "Game");
+            });
+            JPanel buttons = new JPanel();
+            buttons.setOpaque(false);
+            buttons.add(play);
+            menu.add(buttons, BorderLayout.SOUTH);
+            root.add(menu, "Menu");
+            frame.setContentPane(root);
             frame.setSize(1360, 800);
             frame.setLocationRelativeTo(null);
             frame.setVisible(true);

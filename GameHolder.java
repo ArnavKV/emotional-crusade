@@ -87,13 +87,21 @@ public class GameHolder extends JPanel
 	// adds the panels and into the cardlayout
 	public GameHolder(EmotionalCrusadeHolder echIn)
 	{
+		ech = echIn;
+		initializeGame();
+	}
+
+	// Recreate the panels so every per-game field and listener starts fresh.
+	private void initializeGame()
+	{
+		removeAll();
 		amtStartRange = 100;
 		amtGoalValue = 800;
 		isNew = true;
 		isEnded = false;
 		isWon = false;
-		ech = echIn;
 		difficulty = 0;
+		amountGoal = 0;
 		amountsPlayer = new int[4];
 		amountsCPU1 = new int[4];
 		amountsCPU2 = new int[4];
@@ -119,6 +127,15 @@ public class GameHolder extends JPanel
 		add(wp, "Win");
 		add(cp, "Custom");
 		gameLayout.show(this, "Difficulties");
+	}
+
+	public void restartGame()
+	{
+		mg.getTimer().stop();
+		mg.getPassagesHolder().close();
+		initializeGame();
+		revalidate();
+		repaint();
 	}
 
 
@@ -1446,665 +1463,29 @@ class MainGame extends JPanel
 	}
 
 	// Method done by Arnav and a little of Joshua; Massive credits to Scott DeRuiter
-	public void getQuestion() //Sets up the question
+	private QuestionBank questionBank = new QuestionBank(new File("passages.txt"));
+
+	public void getQuestion()
 	{
-		ph.setFile(); //Uses a try catch block to set up the Scanner and the file
-		String whichDifficulty = "";
-		int randomEmotion = (int)(Math.random()*4);
-		int randomQuestion = (int)(Math.random()*6);
-		Scanner reader = ph.getScanner();
-		String passageQuestion = "";
-		while( passageQuestion.equals("") )
+		QuestionBank.Question selected = questionBank.choose(gh.getDifficulty(), emotionOn,
+			isCustomPassages);
+		if (selected == null)
 		{
-			if(gh.getDifficulty() == 0)
-			{
-				while(!(whichDifficulty.equals("@@@@ Easy"))) ///When you see @@@@, it means finding the difficulty
-				{
-					whichDifficulty = reader.nextLine();
-				}
-
-				if (randomEmotion == 0)
-				{
-					if (emotionOn[0] == true) //If emotion was enabled as a passage in CustomPanel
-					{
-						while (!(reader.nextLine().equals("%% Happy"))) ///When you see %%, it means finding the emotion inside the selected difficulty
-						{}
-						if (isCustomPassages == false) //If there are no altered passages
-						{
-							if (happyRepeated[randomQuestion] == false) //Prevents the same question from getting repeated
-							{
-								for (int i = 0; i < 6 * randomQuestion; i++)
-									reader.nextLine();
-								passageQuestion = reader.nextLine();
-								questionAnswer = reader.nextInt();
-								while (!reader.nextLine().equals("&")) {} ///When you see & and !, it means finding the explanations respectively for if the user answered the passage right and wrong
-								correctExplain = reader.nextLine();
-								while (!reader.nextLine().equals("!")) {}
-								wrongExplain = reader.nextLine();
-							}
-							else
-								randomEmotion = (int)(Math.random()*4); //Resets random emotion instead of random question in case all questions for that emotion were used
-							happyRepeated[randomQuestion] = true;
-						}
-						else
-						{
-							for (int i = 0; i < 6 * randomQuestion; i++)
-								reader.nextLine();
-							passageQuestion = reader.nextLine();
-							questionAnswer = reader.nextInt();
-							while (!reader.nextLine().equals("&")) {}
-							correctExplain = reader.nextLine();
-							while (!reader.nextLine().equals("!")) {}
-							wrongExplain = reader.nextLine();
-						}
-					}
-					else
-						randomEmotion = (int)(Math.random()*4);
-				}
-				else if(randomEmotion == 1)
-				{
-					if (emotionOn[1] == true)
-					{
-						while (!(reader.nextLine().equals("%% Sad")))
-						{}
-						if (isCustomPassages == false)
-						{
-							if (sadRepeated[randomQuestion] == false)
-							{
-								for (int i = 0; i < 6 * randomQuestion; i++)
-									reader.nextLine();
-								passageQuestion = reader.nextLine();
-								questionAnswer = reader.nextInt();
-								while (!reader.nextLine().equals("&")) {}
-								correctExplain = reader.nextLine();
-								while (!reader.nextLine().equals("!")) {}
-								wrongExplain = reader.nextLine();
-							}
-							else
-								randomEmotion = (int)(Math.random()*4);
-							sadRepeated[randomQuestion] = true;
-						}
-						else
-						{
-							for (int i = 0; i < 6 * randomQuestion; i++)
-								reader.nextLine();
-							passageQuestion = reader.nextLine();
-							questionAnswer = reader.nextInt();
-							while (!reader.nextLine().equals("&")) {}
-							correctExplain = reader.nextLine();
-							while (!reader.nextLine().equals("!")) {}
-							wrongExplain = reader.nextLine();
-						}
-					}
-					else
-						randomEmotion = (int)(Math.random()*4);
-				}
-
-				else if(randomEmotion == 2)
-				{
-					if (emotionOn[2] == true)
-					{
-						while (!(reader.nextLine().equals("%% Angry")))
-						{}
-						if (isCustomPassages == false)
-						{
-							if (angryRepeated[randomQuestion] == false)
-							{
-								for (int i = 0; i < 6 * randomQuestion; i++)
-									reader.nextLine();
-								passageQuestion = reader.nextLine();
-								questionAnswer = reader.nextInt();
-								while (!reader.nextLine().equals("&")) {}
-								correctExplain = reader.nextLine();
-								while (!reader.nextLine().equals("!")) {}
-								wrongExplain = reader.nextLine();
-							}
-							else
-								randomEmotion = (int)(Math.random()*4);
-							angryRepeated[randomQuestion] = true;
-						}
-						else
-						{
-							for (int i = 0; i < 6 * randomQuestion; i++)
-								reader.nextLine();
-							passageQuestion = reader.nextLine();
-							questionAnswer = reader.nextInt();
-							while (!reader.nextLine().equals("&")) {}
-							correctExplain = reader.nextLine();
-							while (!reader.nextLine().equals("!")) {}
-							wrongExplain = reader.nextLine();
-						}
-					}
-					else
-						randomEmotion = (int)(Math.random()*4);
-				}
-
-				else if(randomEmotion == 3)
-				{
-					if (emotionOn[3] == true)
-					{
-						while (!(reader.nextLine().equals("%% Fear")))
-						{}
-						if (isCustomPassages == false)
-						{
-							if (fearRepeated[randomQuestion] == false)
-							{
-								for (int i = 0; i < 6 * randomQuestion; i++)
-									reader.nextLine();
-								passageQuestion = reader.nextLine();
-								questionAnswer = reader.nextInt();
-								while (!reader.nextLine().equals("&")) {}
-								correctExplain = reader.nextLine();
-								while (!reader.nextLine().equals("!")) {}
-								wrongExplain = reader.nextLine();
-							}
-							else
-								randomEmotion = (int)(Math.random()*4);
-							fearRepeated[randomQuestion] = true;
-						}
-						else
-						{
-							for (int i = 0; i < 6 * randomQuestion; i++)
-								reader.nextLine();
-							passageQuestion = reader.nextLine();
-							questionAnswer = reader.nextInt();
-							while (!reader.nextLine().equals("&")) {}
-							correctExplain = reader.nextLine();
-							while (!reader.nextLine().equals("!")) {}
-							wrongExplain = reader.nextLine();
-						}
-					}
-					else
-						randomEmotion = (int)(Math.random()*4);
-				}
-			}
-			else if(gh.getDifficulty() == 1)
-			{
-				while(!(whichDifficulty.equals("@@@@ Adequate")))
-				{
-					whichDifficulty = reader.nextLine();
-				}
-
-				if (randomEmotion == 0)
-				{
-					if (emotionOn[0] == true)
-					{
-						while (!(reader.nextLine().equals("%% Happy")))
-						{}
-						if (isCustomPassages == false)
-						{
-							if (happyRepeated[randomQuestion] == false)
-							{
-								for (int i = 0; i < 6 * randomQuestion; i++)
-									reader.nextLine();
-								passageQuestion = reader.nextLine();
-								questionAnswer = reader.nextInt();
-								while (!reader.nextLine().equals("&")) {}
-								correctExplain = reader.nextLine();
-								while (!reader.nextLine().equals("!")) {}
-								wrongExplain = reader.nextLine();
-							}
-							else
-								randomEmotion = (int)(Math.random()*4);
-							happyRepeated[randomQuestion] = true;
-						}
-						else
-						{
-							for (int i = 0; i < 6 * randomQuestion; i++)
-								reader.nextLine();
-							passageQuestion = reader.nextLine();
-							questionAnswer = reader.nextInt();
-							while (!reader.nextLine().equals("&")) {}
-							correctExplain = reader.nextLine();
-							while (!reader.nextLine().equals("!")) {}
-							wrongExplain = reader.nextLine();
-						}
-					}
-					else
-						randomEmotion = (int)(Math.random()*4);
-				}
-				else if(randomEmotion == 1)
-				{
-					if (emotionOn[1] == true)
-					{
-						while (!(reader.nextLine().equals("%% Sad")))
-						{}
-						if (isCustomPassages == false)
-						{
-							if (sadRepeated[randomQuestion] == false)
-							{
-								for (int i = 0; i < 6 * randomQuestion; i++)
-									reader.nextLine();
-								passageQuestion = reader.nextLine();
-								questionAnswer = reader.nextInt();
-								while (!reader.nextLine().equals("&")) {}
-								correctExplain = reader.nextLine();
-								while (!reader.nextLine().equals("!")) {}
-								wrongExplain = reader.nextLine();
-							}
-							else
-								randomEmotion = (int)(Math.random()*4);
-							sadRepeated[randomQuestion] = true;
-						}
-						else
-						{
-							for (int i = 0; i < 6 * randomQuestion; i++)
-								reader.nextLine();
-							passageQuestion = reader.nextLine();
-							questionAnswer = reader.nextInt();
-							while (!reader.nextLine().equals("&")) {}
-							correctExplain = reader.nextLine();
-							while (!reader.nextLine().equals("!")) {}
-							wrongExplain = reader.nextLine();
-						}
-					}
-					else
-						randomEmotion = (int)(Math.random()*4);
-				}
-
-				else if(randomEmotion == 2)
-				{
-					if (emotionOn[2] == true)
-					{
-						while (!(reader.nextLine().equals("%% Angry")))
-						{}
-						if (isCustomPassages == false)
-						{
-							if (angryRepeated[randomQuestion] == false)
-							{
-								for (int i = 0; i < 6 * randomQuestion; i++)
-									reader.nextLine();
-								passageQuestion = reader.nextLine();
-								questionAnswer = reader.nextInt();
-								while (!reader.nextLine().equals("&")) {}
-								correctExplain = reader.nextLine();
-								while (!reader.nextLine().equals("!")) {}
-								wrongExplain = reader.nextLine();
-							}
-							else
-								randomEmotion = (int)(Math.random()*4);
-							angryRepeated[randomQuestion] = true;
-						}
-						else
-						{
-							for (int i = 0; i < 6 * randomQuestion; i++)
-								reader.nextLine();
-							passageQuestion = reader.nextLine();
-							questionAnswer = reader.nextInt();
-							while (!reader.nextLine().equals("&")) {}
-							correctExplain = reader.nextLine();
-							while (!reader.nextLine().equals("!")) {}
-							wrongExplain = reader.nextLine();
-						}
-					}
-					else
-						randomEmotion = (int)(Math.random()*4);
-				}
-
-				else if(randomEmotion == 3)
-				{
-					while (!(reader.nextLine().equals("%% Fear")))
-					{}
-					if (emotionOn[3] == true)
-					{
-						if (isCustomPassages == false)
-						{
-							if (fearRepeated[randomQuestion] == false)
-							{
-								for (int i = 0; i < 6 * randomQuestion; i++)
-									reader.nextLine();
-								passageQuestion = reader.nextLine();
-								questionAnswer = reader.nextInt();
-								while (!reader.nextLine().equals("&")) {}
-								correctExplain = reader.nextLine();
-								while (!reader.nextLine().equals("!")) {}
-								wrongExplain = reader.nextLine();
-							}
-							else
-								randomEmotion = (int)(Math.random()*4);
-							fearRepeated[randomQuestion] = true;
-						}
-						else
-						{
-							for (int i = 0; i < 6 * randomQuestion; i++)
-								reader.nextLine();
-							passageQuestion = reader.nextLine();
-							questionAnswer = reader.nextInt();
-							while (!reader.nextLine().equals("&")) {}
-							correctExplain = reader.nextLine();
-							while (!reader.nextLine().equals("!")) {}
-							wrongExplain = reader.nextLine();
-						}
-					}
-					else
-						randomEmotion = (int)(Math.random()*4);
-				}
-			}
-			else if(gh.getDifficulty() == 2)
-			{
-				while(!(whichDifficulty.equals("@@@@ Prohibitive")))
-				{
-					whichDifficulty = reader.nextLine();
-				}
-
-				if (randomEmotion == 0)
-				{
-					if (emotionOn[0] == true)
-					{
-						while (!(reader.nextLine().equals("%% Happy")))
-						{}
-						if (isCustomPassages == false)
-						{
-							if (happyRepeated[randomQuestion] == false)
-							{
-								for (int i = 0; i < 6 * randomQuestion; i++)
-									reader.nextLine();
-								passageQuestion = reader.nextLine();
-								questionAnswer = reader.nextInt();
-								while (!reader.nextLine().equals("&")) {}
-								correctExplain = reader.nextLine();
-								while (!reader.nextLine().equals("!")) {}
-								wrongExplain = reader.nextLine();
-							}
-							else
-								randomEmotion = (int)(Math.random()*4);
-							happyRepeated[randomQuestion] = true;
-						}
-						else
-						{
-							for (int i = 0; i < 6 * randomQuestion; i++)
-								reader.nextLine();
-							passageQuestion = reader.nextLine();
-							questionAnswer = reader.nextInt();
-							while (!reader.nextLine().equals("&")) {}
-							correctExplain = reader.nextLine();
-							while (!reader.nextLine().equals("!")) {}
-							wrongExplain = reader.nextLine();
-						}
-					}
-					else
-						randomEmotion = (int)(Math.random()*4);
-				}
-				else if(randomEmotion == 1)
-				{
-					if (emotionOn[1] == true)
-					{
-						while (!(reader.nextLine().equals("%% Sad")))
-						{}
-						if (isCustomPassages == false)
-						{
-							if (sadRepeated[randomQuestion] == false)
-							{
-								for (int i = 0; i < 6 * randomQuestion; i++)
-									reader.nextLine();
-								passageQuestion = reader.nextLine();
-								questionAnswer = reader.nextInt();
-								while (!reader.nextLine().equals("&")) {}
-								correctExplain = reader.nextLine();
-								while (!reader.nextLine().equals("!")) {}
-								wrongExplain = reader.nextLine();
-							}
-							else
-								randomEmotion = (int)(Math.random()*4);
-							sadRepeated[randomQuestion] = true;
-						}
-						else
-						{
-							for (int i = 0; i < 6 * randomQuestion; i++)
-								reader.nextLine();
-							passageQuestion = reader.nextLine();
-							questionAnswer = reader.nextInt();
-							while (!reader.nextLine().equals("&")) {}
-							correctExplain = reader.nextLine();
-							while (!reader.nextLine().equals("!")) {}
-							wrongExplain = reader.nextLine();
-						}
-					}
-					else
-						randomEmotion = (int)(Math.random()*4);
-				}
-
-				else if(randomEmotion == 2)
-				{
-					if (emotionOn[2] == true)
-					{
-						while (!(reader.nextLine().equals("%% Angry")))
-						{}
-						if (isCustomPassages == false)
-						{
-							if (angryRepeated[randomQuestion] == false)
-							{
-								for (int i = 0; i < 6 * randomQuestion; i++)
-									reader.nextLine();
-								passageQuestion = reader.nextLine();
-								questionAnswer = reader.nextInt();
-								while (!reader.nextLine().equals("&")) {}
-								correctExplain = reader.nextLine();
-								while (!reader.nextLine().equals("!")) {}
-								wrongExplain = reader.nextLine();
-							}
-							else
-								randomEmotion = (int)(Math.random()*4);
-							angryRepeated[randomQuestion] = true;
-						}
-						else
-						{
-							for (int i = 0; i < 6 * randomQuestion; i++)
-								reader.nextLine();
-							passageQuestion = reader.nextLine();
-							questionAnswer = reader.nextInt();
-							while (!reader.nextLine().equals("&")) {}
-							correctExplain = reader.nextLine();
-							while (!reader.nextLine().equals("!")) {}
-							wrongExplain = reader.nextLine();
-						}
-					}
-					else
-						randomEmotion = (int)(Math.random()*4);
-				}
-
-				else if(randomEmotion == 3)
-				{
-					if (emotionOn[3] == true)
-					{
-						while (!(reader.nextLine().equals("%% Fear")))
-						{}
-						if (isCustomPassages == false)
-						{
-							if (fearRepeated[randomQuestion] == false)
-							{
-								for (int i = 0; i < 6 * randomQuestion; i++)
-									reader.nextLine();
-								passageQuestion = reader.nextLine();
-								questionAnswer = reader.nextInt();
-								while (!reader.nextLine().equals("&")) {}
-								correctExplain = reader.nextLine();
-								while (!reader.nextLine().equals("!")) {}
-								wrongExplain = reader.nextLine();
-							}
-							else
-								randomEmotion = (int)(Math.random()*4);
-							fearRepeated[randomQuestion] = true;
-						}
-						else
-						{
-							for (int i = 0; i < 6 * randomQuestion; i++)
-								reader.nextLine();
-							passageQuestion = reader.nextLine();
-							questionAnswer = reader.nextInt();
-							while (!reader.nextLine().equals("&")) {}
-							correctExplain = reader.nextLine();
-							while (!reader.nextLine().equals("!")) {}
-							wrongExplain = reader.nextLine();
-						}
-					}
-					else
-						randomEmotion = (int)(Math.random()*4);
-				}
-			}
-			else if(gh.getDifficulty() == 3)
-			{
-				while(!(whichDifficulty.equals("@@@@ Macabre")))
-				{
-					whichDifficulty = reader.nextLine();
-				}
-
-				if (randomEmotion == 0)
-				{
-					if (emotionOn[0] == true)
-					{
-						while (!(reader.nextLine().equals("%% Happy")))
-						{}
-						if (isCustomPassages == false)
-						{
-							if (happyRepeated[randomQuestion] == false)
-							{
-								for (int i = 0; i < 6 * randomQuestion; i++)
-									reader.nextLine();
-								passageQuestion = reader.nextLine();
-								questionAnswer = reader.nextInt();
-								while (!reader.nextLine().equals("&")) {}
-								correctExplain = reader.nextLine();
-								while (!reader.nextLine().equals("!")) {}
-								wrongExplain = reader.nextLine();
-							}
-							else
-								randomEmotion = (int)(Math.random()*4);
-							happyRepeated[randomQuestion] = true;
-						}
-						else
-						{
-							for (int i = 0; i < 6 * randomQuestion; i++)
-								reader.nextLine();
-							passageQuestion = reader.nextLine();
-							questionAnswer = reader.nextInt();
-							while (!reader.nextLine().equals("&")) {}
-							correctExplain = reader.nextLine();
-							while (!reader.nextLine().equals("!")) {}
-							wrongExplain = reader.nextLine();
-						}
-					}
-					else
-						randomEmotion = (int)(Math.random()*4);
-				}
-				else if(randomEmotion == 1)
-				{
-					if (emotionOn[1] == true)
-					{
-						while (!(reader.nextLine().equals("%% Sad")))
-						{}
-						if (isCustomPassages == false)
-						{
-							if (sadRepeated[randomQuestion] == false)
-							{
-								for (int i = 0; i < 6 * randomQuestion; i++)
-									reader.nextLine();
-								passageQuestion = reader.nextLine();
-								questionAnswer = reader.nextInt();
-								while (!reader.nextLine().equals("&")) {}
-								correctExplain = reader.nextLine();
-								while (!reader.nextLine().equals("!")) {}
-								wrongExplain = reader.nextLine();
-							}
-							else
-								randomEmotion = (int)(Math.random()*4);
-							sadRepeated[randomQuestion] = true;
-						}
-						else
-						{
-							for (int i = 0; i < 6 * randomQuestion; i++)
-								reader.nextLine();
-							passageQuestion = reader.nextLine();
-							questionAnswer = reader.nextInt();
-							while (!reader.nextLine().equals("&")) {}
-							correctExplain = reader.nextLine();
-							while (!reader.nextLine().equals("!")) {}
-							wrongExplain = reader.nextLine();
-						}
-					}
-					else
-						randomEmotion = (int)(Math.random()*4);
-				}
-
-				else if(randomEmotion == 2)
-				{
-					if (emotionOn[2] == true)
-					{
-						while (!(reader.nextLine().equals("%% Angry")))
-						{}
-						if (isCustomPassages == false)
-						{
-							if (angryRepeated[randomQuestion] == false)
-							{
-								for (int i = 0; i < 6 * randomQuestion; i++)
-									reader.nextLine();
-								passageQuestion = reader.nextLine();
-								questionAnswer = reader.nextInt();
-								while (!reader.nextLine().equals("&")) {}
-								correctExplain = reader.nextLine();
-								while (!reader.nextLine().equals("!")) {}
-								wrongExplain = reader.nextLine();
-							}
-							else
-								randomEmotion = (int)(Math.random()*4);
-							angryRepeated[randomQuestion] = true;
-						}
-						else
-						{
-							for (int i = 0; i < 6 * randomQuestion; i++)
-								reader.nextLine();
-							passageQuestion = reader.nextLine();
-							questionAnswer = reader.nextInt();
-							while (!reader.nextLine().equals("&")) {}
-							correctExplain = reader.nextLine();
-							while (!reader.nextLine().equals("!")) {}
-							wrongExplain = reader.nextLine();
-						}
-					}
-					else
-						randomEmotion = (int)(Math.random()*4);
-				}
-
-				else if(randomEmotion == 3)
-				{
-					if (emotionOn[3] == true)
-					{
-						while (!(reader.nextLine().equals("%% Fear")))
-						{}
-						if (isCustomPassages == false)
-						{
-							if (fearRepeated[randomQuestion] == false)
-							{
-								for (int i = 0; i < 6 * randomQuestion; i++)
-									reader.nextLine();
-								passageQuestion = reader.nextLine();
-								questionAnswer = reader.nextInt();
-								while (!reader.nextLine().equals("&")) {}
-								correctExplain = reader.nextLine();
-								while (!reader.nextLine().equals("!")) {}
-								wrongExplain = reader.nextLine();
-							}
-							else
-								randomEmotion = (int)(Math.random()*4);
-							fearRepeated[randomQuestion] = true;
-						}
-						else
-						{
-							for (int i = 0; i < 6 * randomQuestion; i++)
-								reader.nextLine();
-							passageQuestion = reader.nextLine();
-							questionAnswer = reader.nextInt();
-							while (!reader.nextLine().equals("&")) {}
-							correctExplain = reader.nextLine();
-							while (!reader.nextLine().equals("!")) {}
-							wrongExplain = reader.nextLine();
-						}
-					}
-					else
-						randomEmotion = (int)(Math.random()*4);
-				}
-			}
+			timer.stop();
+			gh.setEnded(true);
+			gh.getLosePanel().setEndgameDifficulty(gh.getDifficulty());
+			gh.getLosePanel().updateEndDifficulty();
+			displayResults();
+			gh.getGameCards().show(gh, "Lose");
+			javax.swing.JOptionPane.showMessageDialog(this,
+				"No valid questions are available for the selected difficulty and emotions.\n" +
+				"Check passages.txt or enable another emotion, then restart.");
+			return;
 		}
+		String passageQuestion = selected.passage;
+		questionAnswer = selected.answer;
+		correctExplain = selected.correct;
+		wrongExplain = selected.wrong;
 
 		questionCount--;
 		if (questionCount == 0) //If the question limit reaches zero, the user is taken to overlimit and overLimitChooser
@@ -2113,7 +1494,7 @@ class MainGame extends JPanel
 			if(limitForQuestionLimits == 0) //If the user has reached the question limit 3 times, they lose
 			{
 				timer.stop();
-				gh.setEnded(false);
+				gh.setEnded(true);
 				gh.getLosePanel().setEndgameDifficulty(gh.getDifficulty());
 				gh.getLosePanel().updateEndDifficulty();
 				ph.getPrintWriter().println(result);
@@ -2596,6 +1977,7 @@ class MainGame extends JPanel
 
 		public void actionPerformed(ActionEvent evt)
 		{
+			if (gh.getEnded() || gh.getGame() != MainGame.this) return;
 			timeLeft--;
 			timeRemaining.setText("Time Remaining In Seconds: " + timeLeft);
 			gh.getKingdomDisplayer().getAmountDisplays().updateAmountDisplay();
@@ -2996,17 +2378,10 @@ class MainGame extends JPanel
 	}
 	//Method made by Arnav
 	public void displayResults() //This method updates the lose/win results, where
-	//a scanner reads the file the printwriter wrote to to find the about of questions
-	//the user answered correctly to throughout the game.
+	//the in-memory score is used, avoiding stale or exhausted results scanners.
 	{
-		Scanner input = ph.getResults();
-		int resultIn = -1;
-		while(resultIn == -1)
-		{
-			resultIn = input.nextInt();
-		}
-		loseResultsDisplay.setText("You got " + resultIn +" questions correct throughout the game.");
-		winResultsDisplay.setText("You got " + resultIn +" questions correct throughout the game.");
+		loseResultsDisplay.setText("You got " + result + " questions correct throughout the game.");
+		winResultsDisplay.setText("You got " + result + " questions correct throughout the game.");
 	}
 }
 //Class done by Joshua
@@ -3035,6 +2410,9 @@ class LosePanel extends JPanel
 		add(correctDisplayPanel, BorderLayout.EAST);
 		LoseWestSide lws = new LoseWestSide();
 		add(lws, BorderLayout.WEST);
+		JButton restart = new JButton("Restart Game");
+		restart.addActionListener(evt -> gh.restartGame());
+		add(restart, BorderLayout.SOUTH);
 	}
 	//Class done by Arnav
 //This class displays the difficulty the user played on, as well as a button that
@@ -3127,6 +2505,9 @@ class WinPanel extends JPanel
 		add(correctDisplayPanel, BorderLayout.EAST);
 		WinWestSide wws = new WinWestSide();
 		add(wws, BorderLayout.WEST);
+		JButton restart = new JButton("Restart Game");
+		restart.addActionListener(evt -> gh.restartGame());
+		add(restart, BorderLayout.SOUTH);
 	}
 	//Class done by Arnav
 //This class displays the difficulty the user played on, as well as a button that
@@ -4195,14 +3576,13 @@ class PassagesHolder
 		reader = null;
 		printResults = null;
 		results = null;
-		setFile();
 		setPrintWriter();
-		setResults();
 	}
 
 	public void setFile() //The try catch block to set up the Scanner and the FileIO
 	// (the passages for the questions)
 	{
+		if (reader != null) reader.close();
 		String passageName = new String("passages.txt");
 		File passages = new File(passageName);
 		try
@@ -4219,6 +3599,7 @@ class PassagesHolder
 	public void setPrintWriter() //The try catch block to set up the PrintWriter
 	// (writing the results of how many questions the user got right)
 	{
+		if (printResults != null) printResults.close();
 		String fileName = "results.txt";
 		File resultsFile = new File(fileName);
 		try
@@ -4246,6 +3627,12 @@ String inFileName = new String("results.txt");
 			System.err.println("ERROR: File " + inFileName + " cannot be found.");
 			e.printStackTrace();
 		}
+	}
+	public void close()
+	{
+		if (reader != null) reader.close();
+		if (results != null) results.close();
+		if (printResults != null) printResults.close();
 	}
 	///THE FOLLOWING ARE GETTER SETTER METHODS
 	public Scanner getScanner()
