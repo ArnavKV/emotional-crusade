@@ -1,0 +1,308 @@
+@@@@ Easy
+%% Happy
+"The sky was a bright blue, and I felt great."
+0
+&
+
+!
+
+"It’s my birthday!"
+0
+&
+
+!
+
+"Let’s go! I beat the level."
+0
+&
+
+!
+
+“Yay!”
+0
+&
+
+!
+
+%% Sad
+"I was not happy. I’m not happy right now either."
+1
+&
+This passage uses a direct description of what the character is feeling. Sometimes, simple, direct descriptions are effective too.
+!
+
+“Got unlucky.”
+1
+&
+
+!
+
+“I got a bad score...”
+1
+&
+
+!
+
+%% Angry
+"I was fuming."
+2
+&
+
+!
+
+“You dare attack me?!"
+2
+&
+
+!
+
+"Get back here!"
+2
+&
+
+!
+
+%% Fear
+"I looked in horror, at what was coming at me."
+3
+&
+
+!
+
+"Where am I!?"
+3
+&
+
+!
+
+“AHHH!"
+3
+&
+
+!
+
+@@@@ Adequate
+%% Happy
+"I was finally at peace."
+0
+&
+Peace and comfort are ways to convey happiness. Happy passages do not have to be used in a happy setting. This passage also works just as well in sad scenes, portraying that someone had to make sacrifices to achieve happiness, or in angry/tense scenes, where someone’s happiness was taken away from them.
+!
+
+"The warm breeze that rushes in as you open the door…"
+0
+&
+
+!
+
+"The morning sunshine, greets you with a smile."
+0
+&
+
+!
+
+%% Sad
+"I’m not mad, I’m just disappointed."
+1
+&
+This passage uses a direct description of the emotion in the second part of the passage. This passage is far from only used in sad situations, you may also use a sad technique for an angry scene, to build sadness or regret into the person who hears these words.
+!
+
+"There’s nothing you can do."
+1
+&
+
+!
+
+"It was inevitable."
+1
+&
+
+!
+
+%% Angry
+"I felt my body get set ablaze, and I was more than eager to release my flames in an outward burst."
+2
+&
+
+!
+
+“Like a storm rising up from the bottom of your boiling blood."
+2
+&
+
+!
+
+"Like grasping a hot coal with the intent of throwing it at someone else."
+2
+&
+
+!
+
+%% Fear
+"The cold numbness in my hands, the trembling of my fingers..."
+3
+&
+
+!
+
+"Paranoia of the unknown."
+3
+&
+
+!
+
+"Forget everything and run."
+3
+&
+
+!
+
+@@@@ Prohibitive
+%% Happy
+"Hello, my old friend."
+0
+&
+Although this passage conveys emotion of happiness, it is not limited to be used during happy scenes. For example, using this passage as the start of a fight can convey both anger and sadness, and using this passage in a graveyard setting can convey sadness, even though this passage is conveying the emotion of happiness.
+!
+
+“There’s nothing like deep breaths after laughing that hard.”
+0
+&
+
+!
+
+“The charming gardeners who make our souls blossom.”
+0
+&
+
+!
+
+%% Sad
+"I felt as if my chest and guts had been grabbed by the coldness of death’s grasp, and he dragged my soul down, down, down…"
+1
+&
+This passage uses a technique of descriptions of temperature. By pairing the technique with a "speed" of description, emotions can be conveyed, for example, a cold temperature with a slow description conveys sadness, cold with a fast description conveys fear, hot with fast conveys anger, and hot with slow usually conveys happiness. Finally, symbols, or symbols of symbols, can also be implemented into the passage to provide stronger impact.
+!
+This passage is conveying the emotion of sadness. It uses a technique of descriptions of temperature. By pairing the technique with a "speed" of description, emotions can be conveyed. In this case, a cold temperature with a slow description conveys sadness. Symbols, or symbols of symbols, can also be implemented into the passage to provide stronger impact. In this case, the symbol is "death" who grasps you, and death itself is a symbol for sadness.
+“My limp body fell to the floor, no strength to keep me standing strong.”
+1
+&
+
+!
+
+“I saw a hallucination of my long gone mother for the last time.”
+1
+&
+
+!
+
+%% Angry
+"You'll pay for what you've done!"
+2
+&
+
+!
+
+"The truth will set you free, but first it will piss you off."
+2
+&
+
+!
+
+"A sore jaw from clenching your teeth."
+2
+&
+
+!
+
+%% Fear
+"I screamed, hoping that would do something."
+3
+&
+Screaming is a reaction to a negative event. Humans, by nature , desire only positive events. Therefore, humans would fear negative events, which are completely opposite to positive events. So screaming is an outward projection of said fear of negative events.
+!
+
+“I was running from the unknown.” 
+3
+&
+This passage uses 
+!
+
+“prohibitive fear” 
+3
+&
+This passage uses 
+!
+
+@@@@ Macabre
+%% Happy
+"Mmm… No."
+0
+&
+This passage uses the action of “Mmm…” to show thinking, which shows consideration and care, which shows a peace of mind, or happiness. For example, if there was a tense, "angry" scene, using a happy tone like this can add to a sense of sarcasm or cynicism, which can help establish a specific character tone even better.
+!
+This passage uses the technique of interpretations of simple actions. The simple dialogue of "Mmm…" shows thinking, which shows consideration, which shows care, which shows a peace of mind, and a peace of mind is a core element to happiness.. Using a happy technique is not limited to a happy scene, for example using this passage in an “angry” scene can add to a sense of miscare, or blinding rage that shows lack of compassion.
+“The Very Hungry Caterpillar”
+0
+&
+The plot of “The Very Hungry Caterpillar” is that the caterpillar is hungry and eats lots of food. When we eat food, our brain sends signals for happiness. So by applying that logic, eating food means being happy, therefore a book about eating lots of food gives the emotion of happiness. You can apply biological emotional processes to subtly convey emotions without people realizing it. 
+!
+The plot of “The Very Hungry Caterpillar” is that the caterpillar is hungry and eats lots of food. When humans eat food, our brain sends out dopamine, the “reward chemicals”, to make us happy. So since eating food releases chemicals to make us happy, eating food means being happy. Therefore, a book about eating lots of food means being happy.
+“”
+0
+&
+
+!
+
+%% Sad
+“no…. no.... …” 
+1
+&
+By using a slow, quiet “momentum” in the passage, the feeling of hopelessness can be conveyed. Silence, which can be represented by … 's, convey a sense of solemnness.
+!
+
+"I pondered, was no blowing of a leaf, as thou, angel, returned to thy eternal mountains."
+1
+&
+There are several ways to COMPLICATE simple passages, and with this in mind, you can also deconstruct said complex passages, and break them down into their simple phrases, which makes interpreting the meanings much easier.
+!
+This passage may seem very hard to understand, but at the core, its meaning is simple. By deconstructing this passage to the simplest words, you get, "I looked, and there was silence, as you, the angel you were, was carried into your tomb." This simpler passage uses symbolism to convey sadness, through the “silence”, and plays with core elements, as the happiness, “the angel”, is taken away from this person. The taking away of happiness is a core element of sadness. 
+%% Angry
+"The strength of my resolve shines through the darkness!"
+2
+&
+
+!
+Unlike the assumed answer, this passage is not happy because there is no joy, no feeling of comfort or peace in this passage. This passage is very much tense, and filled with passion. Passion is an extension of anger, and is what makes up a significant portion of what anger is: that lingering feeling that empowers you to continue with your actions, otherwise known as passion.
+“NO…!”
+2
+&
+
+!
+
+“Laughter is a poison.”
+2
+&
+Laughter is a happy, positive action. This passage is treating laughter as a negative action. Turning a positive action into a negative action can be seen as a form of destruction. Therefore, if you want to destroy laughter, you are usually angry, as a key part of anger is wanting to destroy.
+!
+Laughter is a happy, positive action. This passage is treating laughter as a negative action. A core element of anger is the desire to destroy. Turning a positive action into a negative action can be seen as a form of destruction. Therefore, if you want to cause destruction in this way, that is anger.
+%% Fear
+“no…nononoNONO”
+3
+&
+This passage uses the technique of interpretations of simple actions. The emotion starts off with a sad tone, but QUICKLY escalates to a panicked state and a cry of desperation. The key point here is that the passage starts slow then very quickly gets loud, just like how emotions of fear or dread would work in real life.
+!
+
+"I watched the streaks of crimson red blood dance out in front of my eyes, and splatter into my limp hands."
+3
+&
+This passage uses symbolic description. The reason this passage aligns with the fear emotion rather than the sad emotion is because the release of blood is a symbol for pain, and pain is usually used as a symbol for fear. For example, in a novel, if the character gets shot but survives, the pain emphasized by the bullet wound is usually paired with fear, unless the focus of the novel is NOT on the bullet. A symbol for sadness would be death, where all the activity and life is sucked away into a cold nothing, If someone is shot dead, fear comes first from the symbol of blood, then sadness comes after from the symbol of death.
+!
+
+“macabre fear”
+3
+&
+
+!
+
